@@ -4,6 +4,6 @@
 cd `dirname $0`
 
 # 双路由
-./iproute
+../bin/iproute
 
 
