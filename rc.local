@@ -1,0 +1,9 @@
+# 由/etc/rc.local调用
+
+# 切换目录到本文件所在目录
+cd `dirname $0`
+
+# 双路由
+./iproute
+
+

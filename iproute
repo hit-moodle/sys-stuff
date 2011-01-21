@@ -1,0 +1,8 @@
+# 教育网源地址路由
+/sbin/ip route add default via 219.217.226.254 table 100
+/sbin/ip rule add from 219.217.226.137 table 100
+
+# 联通源地址路由
+/sbin/ip route add default via 61.167.60.62 table 200
+/sbin/ip rule add from 61.167.60.37 table 200
+
