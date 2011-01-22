@@ -1,4 +1,9 @@
 # 由/etc/rc.local调用
+# /etc/rc.local里放入下面三行代码
+# if [ -x /root/sys-stuff/etc/rc.local ]; then
+#        /root/sys-stuff/etc/rc.local
+# fi
+
 
 # 切换目录到本文件所在目录
 cd `dirname $0`
