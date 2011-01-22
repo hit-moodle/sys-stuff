@@ -1,3 +1,4 @@
+#!/bin/sh
 # 用 ip route show table all 和 ip rule show 检查是否生效
 
 # 教育网源地址路由
