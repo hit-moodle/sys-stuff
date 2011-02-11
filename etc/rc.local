@@ -5,10 +5,9 @@
 # fi
 
 
-# 切换目录到本文件所在目录
-cd `dirname $0`
+. `dirname $0`/../etc/config
 
 # 双路由
-../bin/iproute
-
-
+if [ $DUAL_IP = yes ]; then
+    $ROOT/bin/iproute
+fi

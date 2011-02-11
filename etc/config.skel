@@ -1,0 +1,6 @@
+# Root path of sys-stuff
+ROOT=
+
+# Dual IP ?
+DUAL_IP=yes # no
+
