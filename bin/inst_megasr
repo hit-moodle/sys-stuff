@@ -32,7 +32,7 @@ fi
 TARGET_VER=$1
 KODST="$LIBMODULE/$TARGET_VER/$KOPATH"
 
-cp -p "$KOSRC" "$KODST"
-depmod $TARGET_VER
-mv $INITRD$TARGET_VER.img $INITRD$TARGET_VER.img.old
-mkinitrd $INITRD$TARGET_VER.img $TARGET_VER
+cp -pi "$KOSRC" "$KODST"
+/sbin/depmod $TARGET_VER
+mv -i $INITRD$TARGET_VER.img $INITRD$TARGET_VER.img.old
+/sbin/mkinitrd $INITRD$TARGET_VER.img $TARGET_VER
