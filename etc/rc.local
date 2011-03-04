@@ -12,3 +12,5 @@
 if [ $DUAL_IP = yes ]; then
     $ROOT/bin/iproute
 fi
+
+$ROOT/bin/moodle_init

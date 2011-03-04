@@ -4,3 +4,9 @@ ROOT=
 # Dual IP ?
 DUAL_IP=yes # no
 
+# For moodle
+MOODLE_SESSIONS_PATH=
+MOODLE_TEMP_PATH=
+
+# httpd (apache or nginx) user name
+HTTPD_USER=

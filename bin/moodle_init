@@ -1,0 +1,15 @@
+#!/bin/sh
+# 初始化moodle运行环境
+
+. `dirname $0`/../etc/config
+
+if [ ! -a $MOODLE_SESSIONS_PATH ]; then
+    mkdir -p $MOODLE_SESSIONS_PATH
+fi
+
+if [ ! -a $MOODLE_TEMP_PATH ]; then
+    mkdir -p $MOODLE_TEMP_PATH
+fi
+
+chown -R $HTTPD_USER: $MOODLE_SESSIONS_PATH
+chown -R $HTTPD_USER: $MOODLE_TEMP_PATH
