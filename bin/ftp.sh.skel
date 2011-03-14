@@ -1,8 +1,8 @@
 spawn ftp [lindex $argv 0]
 expect "Name (*):"
-send "sun\r"
+send "username\r"
 expect "Password:*"
-send "sun13604804426\r"
+send "password\r"
 expect "ftp>"
 send "binary\r"
 expect "ftp>"
