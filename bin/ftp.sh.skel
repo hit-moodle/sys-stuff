@@ -1,0 +1,15 @@
+spawn ftp [lindex $argv 0]
+expect "Name (*):"
+send "username\r"
+expect "Password:*"
+send "password\r"
+expect "ftp>"
+send "binary\r"
+expect "ftp>"
+send "hash\r"
+expect "ftp>"
+send "put [lindex $argv 1]\r"
+expect "* Transfer complete."
+send "exit\r"
+
+
