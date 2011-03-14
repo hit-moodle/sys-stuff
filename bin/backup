@@ -29,7 +29,7 @@ if [ -e $CONF_LIST ]; then
 	do
 		DES_FILE=`echo ${address##*/}` 
 		DES_FILE=`printf "%s%s%s%s" "$DES_DIR/" "$DES_FILE" "$CUR_DATE" ".tar.gz"`
-		tar -zcvf $DES_FILE $address
+		tar -zcf $DES_FILE $address
 		cd $DES_DIR
 		FTP_FILE=`echo ${DES_FILE##*/}` 
 		expect $CMD_FTP $HOST_IP $FTP_FILE
