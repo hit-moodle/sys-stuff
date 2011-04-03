@@ -11,8 +11,9 @@ MOODLE_TEMP_PATH=
 # httpd (apache or nginx) user name
 HTTPD_USER=
 
-# Path to store backup files
-BACKUP_PATH=
+# Backup settings
+BACKUP_PATH= # Path to store backup files
+BACKUP_FROM="/xxx/yyy /foo/bar"
 KEEP_DAYS=
 
 # DB backup

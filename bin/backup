@@ -6,46 +6,28 @@ test -r $CONFIG || exit
 
 CUR_DATE=`date +20%y%m%d `  #FIXME:20xx year
 
-CONF_LIST=$ROOT/etc/backup.list
 DES_DIR=$BACKUP_PATH
-SRC_DIR=
+SRC_DIRS=$BACKUP_FROM
 LOG_FILE=/var/log/backup.log
-flags=c:d:s:l:?
+flags=d:s:l:?
 
 while getopts $flags name
 do
 	case $name in
-	c)	CONF_LIST="$OPTARG";;
 	d)	DES_DIR="$OPTARG";;
-	s)	SRC_DIR="$OPTARG";;
+	s)	SRC_DIRS="$OPTARG";;
 	l)	LOG_FILE="$OPTARG";;
 	esac
 done
 
-#backup from  config list
-if [ -e $CONF_LIST ]; then
-	sed '/^$/d' $CONF_LIST -i
-	while read address 
-	do
-		DES_FILE=`echo ${address##*/}` 
-		DES_FILE=`printf "%s%s_%s%s" "$DES_DIR/" "$DES_FILE" "$CUR_DATE" ".tar.gz"`
-		tar -zcf $DES_FILE $address
-        md5sum $DES_FILE > $DES_FILE.md5
+for SRC_DIR in $SRC_DIRS; do
+    DES_FILE=`echo ${SRC_DIR##*/}` 
+    DES_FILE=`printf "%s%s_%s%s" "$DES_DIR/" "$DES_FILE" "$CUR_DATE" ".tar.gz"`
+    tar -zcf $DES_FILE $SRC_DIR
+    md5sum $DES_FILE > $DES_FILE.md5
 
-		echo "$CUR_DATE: $DES_FILE from $address" >> $LOG_FILE
-	done < $CONF_LIST
-fi
-
-
-#backup from  -s opt
-if [ -n "$SRC_DIR" ]; then
-	DES_FILE=`echo ${SRC_DIR##*/}` 
-	DES_FILE=`printf "%s%s%s%s" "$DES_DIR/" "$DES_FILE" "$CUR_DATE" ".tar.gz"`
-	tar -zcvf $DES_FILE $SRC_DIR
-
-	echo "$CUR_DATE: $DES_FILE from $SRC_FILE" >> $LOG_FILE
-fi
-	
+    echo "$CUR_DATE: $DES_FILE from $SRC_DIR" >> $LOG_FILE
+done
 
 exit 0
 
