@@ -8,10 +8,10 @@
 LogFile=/srv/backup/db.log
 BackupMethod=mysqldump
 
-NewFile="$BACKUP_PATH"db$(date +%y%m%d).tgz
+NewFile="$BACKUP_PATH"/db_$(date +%y%m%d).tgz
 
-DumpFile="$BACKUP_PATH"db$(date +%y%m%d)
-OldFile="$BACKUP_PATH"db$(date +%y%m%d --date='5 days ago').tgz
+DumpFile="$BACKUP_PATH"/db_$(date +%y%m%d)
+OldFile="$BACKUP_PATH"/db_$(date +%y%m%d --date='5 days ago').tgz
 SnapFile=/var/www/snapshot.tgz
 echo "-------------------------------------------" >> $LogFile
 echo $(date +"%y-%m-%d %H:%M:%S") >> $LogFile
