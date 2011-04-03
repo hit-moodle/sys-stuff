@@ -10,3 +10,8 @@ MOODLE_TEMP_PATH=
 
 # httpd (apache or nginx) user name
 HTTPD_USER=
+
+# DB backup
+DBName=
+DBUser=
+DBPasswd=

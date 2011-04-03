@@ -1,17 +1,13 @@
 #!/bin/bash
 
 #--------Configure the Datase First--------------------
-DBName=
-DBUser=
-DBPasswd=
+
+. `dirname $0`/../etc/config
+
 #-----------------------------------------------------
 BackupPath=/srv/backup/
 LogFile=/srv/backup/db.log
 BackupMethod=mysqldump
-
-HOST_IP='219.217.228.125'
-CMD_FTP=/root/sys/bin/ftp.sh
-FTP_FILE=" "
 
 NewFile="$BackupPath"db$(date +%y%m%d).tgz
 
@@ -45,10 +41,6 @@ else
       tar czvf $NewFile $DumpFile >> $LogFile 2>&1
       echo "[$NewFile]Backup Success!" >> $LogFile
       rm -rf $DumpFile
-      FTP_FILE=`echo ${NewFile##*/}`
-	cd $BackupPath
-      expect $CMD_FTP $HOST_IP $FTP_FILE		
-#      expect $CMD_FTP $HOST_IP $NewFILE		
       ;;
    mysqlhotcopy)
       rm -rf $DumpFile
