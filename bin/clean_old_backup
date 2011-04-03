@@ -7,4 +7,4 @@ test -r $CONFIG || exit
 
 echo "Cleaning old backup files in $BACKUP_PATH"
 
-rm -fv `find $BACKUP_PATH -maxdepth 1 -mtime +$KEEP_DAYS`
+rm -fv `find $BACKUP_PATH -maxdepth 1 -type f -mtime +$KEEP_DAYS`
