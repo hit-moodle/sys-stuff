@@ -30,6 +30,7 @@ if [ -e $CONF_LIST ]; then
 		DES_FILE=`echo ${address##*/}` 
 		DES_FILE=`printf "%s%s_%s%s" "$DES_DIR/" "$DES_FILE" "$CUR_DATE" ".tar.gz"`
 		tar -zcf $DES_FILE $address
+        md5sum $DES_FILE > $DES_FILE.md5
 
 		echo "$CUR_DATE: $DES_FILE from $address" >> $LOG_FILE
 	done < $CONF_LIST

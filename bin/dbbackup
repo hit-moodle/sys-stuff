@@ -31,6 +31,7 @@ else
          mysqldump -u $DBUser -p$DBPasswd --opt $DBName > $DumpFile
       fi
       tar czvf $NewFile $DumpFile >> $LogFile 2>&1
+      md5sum $NewFile > $NewFile.md5
       echo "[$NewFile]Backup Success!" >> $LogFile
       rm -rf $DumpFile
       ;;
