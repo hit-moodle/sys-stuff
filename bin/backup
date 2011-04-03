@@ -4,7 +4,7 @@ CONFIG=`dirname $0`/../etc/config
 test -r $CONFIG || exit
 . $CONFIG
 
-CUR_DATE=`date +20%y%m%d `  #FIXME:20xx year
+CUR_DATE=`date +%Y%m%d `
 
 DES_DIR=$BACKUP_PATH
 SRC_DIRS=$BACKUP_FROM
