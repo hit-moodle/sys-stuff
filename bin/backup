@@ -1,9 +1,7 @@
 #!/bin/sh
-HOST_IP='219.217.228.125'
 
 CUR_DATE=`date +20%y%m%d `  #FIXME:20xx year
 CURRENT_DIR=$(pwd)
-CMD_FTP=/root/sys/bin/ftp.sh
 
 CONF_LIST=`printf "%s%s" "$CURRENT_DIR/" "backup.list" `
 DES_DIR=$CURRENT_DIR
@@ -30,10 +28,6 @@ if [ -e $CONF_LIST ]; then
 		DES_FILE=`echo ${address##*/}` 
 		DES_FILE=`printf "%s%s%s%s" "$DES_DIR/" "$DES_FILE" "$CUR_DATE" ".tar.gz"`
 		tar -zcf $DES_FILE $address
-		cd $DES_DIR
-		FTP_FILE=`echo ${DES_FILE##*/}` 
-		expect $CMD_FTP $HOST_IP $FTP_FILE
-#		expect /root/sys/bin/ftp.sh $HOST_IP $FTP_FILE
 
 		echo "$CUR_DATE: $DES_FILE from $address" >> $LOG_FILE
 	done < $CONF_LIST
@@ -45,8 +39,6 @@ if [ -n "$SRC_DIR" ]; then
 	DES_FILE=`echo ${SRC_DIR##*/}` 
 	DES_FILE=`printf "%s%s%s%s" "$DES_DIR/" "$DES_FILE" "$CUR_DATE" ".tar.gz"`
 	tar -zcvf $DES_FILE $SRC_DIR
-	FTP_FILE=`echo ${DES_FILE##*/}` 
-	expect ftp.sh $HOST_IP $FTP_FILE
 
 	echo "$CUR_DATE: $DES_FILE from $SRC_FILE" >> $LOG_FILE
 fi
