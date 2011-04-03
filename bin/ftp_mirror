@@ -1,0 +1,9 @@
+#!/bin/sh
+# Clean old backup files. Put persistent files into subdirs.
+
+CONFIG=`dirname $0`/../etc/config
+test -r $CONFIG || exit
+. $CONFIG
+
+echo "Mirroring backup files from $BACKUP_PATH to $FTP_SERVER"
+cd $BACKUP_PATH && lftp ftp://$FTP_USERNAME:$FTP_PASSWORD@$FTP_SERVER -e "mirror -R --delete --delete-first --loop"

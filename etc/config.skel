@@ -20,6 +20,11 @@ DBName=
 DBUser=
 DBPasswd=
 
+# remote backup FTP server
+FTP_SERVER=
+FTP_USERNAME=
+FTP_PASSWORD=
+
 # Short BACKUP_PATH is dangerous!
 if [ -z $BACKUP_PATH ] || [ $BACKUP_PATH == "/" ] ; then
     exit
