@@ -5,8 +5,9 @@
 #        /root/sys-stuff/etc/rc.local
 # fi
 
-
-. `dirname $0`/../etc/config
+CONFIG=`dirname $0`/../etc/config
+test -r $CONFIG || exit
+. $CONFIG
 
 # 双路由
 if [ $DUAL_IP = yes ]; then

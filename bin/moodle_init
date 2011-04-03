@@ -1,7 +1,9 @@
 #!/bin/sh
 # 初始化moodle运行环境
 
-. `dirname $0`/../etc/config
+CONFIG=`dirname $0`/../etc/config
+test -r $CONFIG || exit
+. $CONFIG
 
 if [ ! -a $MOODLE_SESSIONS_PATH ]; then
     mkdir -p $MOODLE_SESSIONS_PATH

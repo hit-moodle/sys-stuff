@@ -13,8 +13,14 @@ HTTPD_USER=
 
 # Path to store backup files
 BACKUP_PATH=
+KEEP_DAYS=
 
 # DB backup
 DBName=
 DBUser=
 DBPasswd=
+
+# Short BACKUP_PATH is dangerous!
+if [ -z $BACKUP_PATH ] || [ $BACKUP_PATH == "/" ] ; then
+    exit
+fi

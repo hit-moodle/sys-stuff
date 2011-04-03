@@ -1,0 +1,10 @@
+#!/bin/sh
+# Clean old backup files. Put persistent files into subdirs.
+
+CONFIG=`dirname $0`/../etc/config
+test -r $CONFIG || exit
+. $CONFIG
+
+echo "Cleaning old backup files in $BACKUP_PATH"
+
+rm -fv `find $BACKUP_PATH -maxdepth 1 -mtime +$KEEP_DAYS`

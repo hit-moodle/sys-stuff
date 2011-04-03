@@ -2,7 +2,9 @@
 
 #--------Configure the Datase First--------------------
 
-. `dirname $0`/../etc/config
+CONFIG=`dirname $0`/../etc/config
+test -r $CONFIG || exit
+. $CONFIG
 
 #-----------------------------------------------------
 LogFile=/srv/backup/db.log
