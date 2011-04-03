@@ -26,9 +26,9 @@ else
    mysqldump)
       if [ -z $DBPasswd ]
       then
-         mysqldump -u $DBUser --opt $DBName > $DumpFile
+         mysqldump -u $DBUser --single-transaction --opt --skip-lock-tables $DBName > $DumpFile
       else
-         mysqldump -u $DBUser -p$DBPasswd --opt $DBName > $DumpFile
+         mysqldump -u $DBUser -p$DBPasswd --single-transaction --opt --skip-lock-tables $DBName > $DumpFile
       fi
       tar czvf $NewFile $DumpFile >> $LogFile 2>&1
       md5sum $NewFile > $NewFile.md5
