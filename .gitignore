@@ -2,3 +2,4 @@
 /etc/confxml.xml
 /etc/rsync.pass
 /etc/cron
+/etc/backup.list

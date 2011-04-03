@@ -3,13 +3,11 @@
 . `dirname $0`/../etc/config
 
 CUR_DATE=`date +20%y%m%d `  #FIXME:20xx year
-CURRENT_DIR=$(pwd)
 
-CONF_LIST=`printf "%s%s" "$CURRENT_DIR/" "backup.list" `
+CONF_LIST=$ROOT/etc/backup.list
 DES_DIR=$BACKUP_PATH
 SRC_DIR=
 LOG_FILE=/var/log/backup.log
-FTP_FILE=""
 flags=c:d:s:l:?
 
 while getopts $flags name
@@ -28,7 +26,7 @@ if [ -e $CONF_LIST ]; then
 	while read address 
 	do
 		DES_FILE=`echo ${address##*/}` 
-		DES_FILE=`printf "%s%s%s%s" "$DES_DIR/" "$DES_FILE" "$CUR_DATE" ".tar.gz"`
+		DES_FILE=`printf "%s%s_%s%s" "$DES_DIR/" "$DES_FILE" "$CUR_DATE" ".tar.gz"`
 		tar -zcf $DES_FILE $address
 
 		echo "$CUR_DATE: $DES_FILE from $address" >> $LOG_FILE
