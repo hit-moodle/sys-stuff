@@ -1,3 +1,4 @@
 /etc/config
 /etc/confxml.xml
 /etc/rsync.pass
+/etc/cron
