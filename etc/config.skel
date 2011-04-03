@@ -27,5 +27,6 @@ FTP_PASSWORD=
 
 # Short BACKUP_PATH is dangerous!
 if [ -z $BACKUP_PATH ] || [ $BACKUP_PATH == "/" ] ; then
+    echo "BACKUP_PATH in config can not be empty!"
     exit
 fi
