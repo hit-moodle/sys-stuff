@@ -11,19 +11,10 @@ BackupMethod=mysqldump
 NewFile="$BACKUP_PATH"/db_$(date +%y%m%d).tgz
 
 DumpFile="$BACKUP_PATH"/db_$(date +%y%m%d)
-OldFile="$BACKUP_PATH"/db_$(date +%y%m%d --date='5 days ago').tgz
 SnapFile=/var/www/snapshot.tgz
 echo "-------------------------------------------" >> $LogFile
 echo $(date +"%y-%m-%d %H:%M:%S") >> $LogFile
 echo "--------------------------" >> $LogFile
-#Delete Old File
-if [ -f $OldFile ]
-then
-   rm -f $OldFile >> $LogFile 2>&1
-   echo "[$OldFile]Delete Old File Success!" >> $LogFile
-else
-   echo "[$OldFile]No Old Backup File!" >> $LogFile
-fi
 
 if [ -f $NewFile ]
 then
