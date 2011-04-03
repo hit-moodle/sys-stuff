@@ -8,7 +8,6 @@ CUR_DATE=`date +%Y%m%d `
 
 DES_DIR=$BACKUP_PATH
 SRC_DIRS=$BACKUP_FROM
-LOG_FILE=/var/log/backup.log
 flags=d:s:l:?
 
 while getopts $flags name
@@ -26,7 +25,7 @@ for SRC_DIR in $SRC_DIRS; do
     tar -zcf $DES_FILE $SRC_DIR
     md5sum $DES_FILE > $DES_FILE.md5
 
-    echo "$CUR_DATE: $DES_FILE from $SRC_DIR" >> $LOG_FILE
+    echo "$CUR_DATE: $DES_FILE from $SRC_DIR"
 done
 
 exit 0
