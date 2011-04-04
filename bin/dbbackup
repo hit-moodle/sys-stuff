@@ -10,9 +10,9 @@ test -r $CONFIG || exit
 LogFile=/srv/backup/db.log
 BackupMethod=mysqldump
 
-NewFile="$BACKUP_PATH/$DBName"_$(date +%Y%m%d).tgz
+NewFile="$BACKUP_PATH/db_$DBName"_$(date +%Y%m%d).tgz
 
-DumpFile="$BACKUP_PATH/$DBName"_$(date +%Y%m%d)
+DumpFile="$BACKUP_PATH/db_$DBName"_$(date +%Y%m%d)
 SnapFile=/var/www/snapshot.tgz
 echo "-------------------------------------------"
 echo $(date +"%y-%m-%d %H:%M:%S")
