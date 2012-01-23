@@ -8,8 +8,8 @@ test -r $CONFIG || exit
 
 #-----------------------------------------------------
 
-NewFile="$BACKUP_PATH/db_$DBName"_$(date +%Y%m%d).tgz
-DumpFile="$BACKUP_PATH/db_$DBName"_$(date +%Y%m%d).sql
+NewFile="$BACKUP_PATH/db_$DBName"_$(date +%Y%m%d).gz
+
 echo "-------------------------------------------"
 echo $(date +"%y-%m-%d %H:%M:%S")
 echo "-------------------------------------------"
@@ -19,11 +19,9 @@ then
     echo "[$NewFile]The backup file exists, can't backup!"
 else
     [ -n $DBPasswd ] && pass=-p$DBPasswd
-    mysqldump -u $DBUser $pass -h $DBHost --single-transaction --opt --skip-lock-tables $DBName > $DumpFile
-    tar czvf $NewFile $DumpFile
+    mysqldump -u $DBUser $pass -h $DBHost --single-transaction --opt --skip-lock-tables $DBName | gzip > $NewFile
     md5sum $NewFile > $NewFile.md5
-    echo "[$NewFile]Backup Success!"
-    rm -rf $DumpFile
+    echo "[$NewFile] Backup Success!"
 fi
 echo "-------------------------------------------"
 
