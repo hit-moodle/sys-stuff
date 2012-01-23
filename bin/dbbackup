@@ -10,7 +10,7 @@ test -r $CONFIG || exit
 
 #-----------------------------------------------------
 
-NewFile="$BACKUP_PATH/db_$DBName"_$DBTables$(date +%Y%m%d).gz
+NewFile="$BACKUP_PATH/db_$DBName"_$DBTables$(date +%Y%m%d).sql.gz
 
 echo "-------------------------------------------"
 echo $(date +"%y-%m-%d %H:%M:%S")
