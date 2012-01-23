@@ -17,6 +17,7 @@ BACKUP_FROM="/xxx/yyy /foo/bar"
 KEEP_DAYS=
 
 # DB backup
+DBHost="localhost"
 DBName=
 DBUser=
 DBPasswd=

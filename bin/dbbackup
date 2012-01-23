@@ -1,61 +1,29 @@
 #!/bin/bash
 
-#--------Configure the Datase First--------------------
+#--------Configure the Database First--------------------
 
 CONFIG=`dirname $0`/../etc/config
 test -r $CONFIG || exit
 . $CONFIG
 
 #-----------------------------------------------------
-LogFile=/srv/backup/db.log
-BackupMethod=mysqldump
 
 NewFile="$BACKUP_PATH/db_$DBName"_$(date +%Y%m%d).tgz
-
-DumpFile="$BACKUP_PATH/db_$DBName"_$(date +%Y%m%d)
-SnapFile=/var/www/snapshot.tgz
+DumpFile="$BACKUP_PATH/db_$DBName"_$(date +%Y%m%d).sql
 echo "-------------------------------------------"
 echo $(date +"%y-%m-%d %H:%M:%S")
-echo "--------------------------"
+echo "-------------------------------------------"
 
 if [ -f $NewFile ]
 then
-   echo "[$NewFile]The Backup File is exists,Can't Backup!"
+    echo "[$NewFile]The backup file exists, can't backup!"
 else
-   case $BackupMethod in
-   mysqldump)
-      if [ -z $DBPasswd ]
-      then
-         mysqldump -u $DBUser --single-transaction --opt --skip-lock-tables $DBName > $DumpFile
-      else
-         mysqldump -u $DBUser -p$DBPasswd --single-transaction --opt --skip-lock-tables $DBName > $DumpFile
-      fi
-      tar czvf $NewFile $DumpFile
-      md5sum $NewFile > $NewFile.md5
-      echo "[$NewFile]Backup Success!"
-      rm -rf $DumpFile
-      ;;
-   mysqlhotcopy)
-      rm -rf $DumpFile
-      mkdir $DumpFile
-      if [ -z $DBPasswd ]
-      then
-         mysqlhotcopy -u $DBUser $DBName $DumpFile
-      else
-         mysqlhotcopy -u $DBUser -p$DBPasswd $DBName $DumpFile
-      fi
-      tar czvf $NewFile $DumpFile
-      echo "[$NewFile]Backup Success!"
-      rm -rf $DumpFile
-      ;;
-   *)
-      /etc/init.d/mysqld stop
-      tar czvf $NewFile $DBPath$DBName
-      cp -vf $NewFile $SnapFile
-      /etc/init.d/mysqld start
-      echo "[$NewFile]Backup Success!"
-      ;;
-   esac
+    [ -n $DBPasswd ] && pass=-p$DBPasswd
+    mysqldump -u $DBUser $pass -h $DBHost --single-transaction --opt --skip-lock-tables $DBName > $DumpFile
+    tar czvf $NewFile $DumpFile
+    md5sum $NewFile > $NewFile.md5
+    echo "[$NewFile]Backup Success!"
+    rm -rf $DumpFile
 fi
 echo "-------------------------------------------"
 
