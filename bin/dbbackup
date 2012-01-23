@@ -6,9 +6,11 @@ CONFIG=`dirname $0`/../etc/config
 test -r $CONFIG || exit
 . $CONFIG
 
+[ -n $1 ] && DBTables=$1
+
 #-----------------------------------------------------
 
-NewFile="$BACKUP_PATH/db_$DBName"_$(date +%Y%m%d).gz
+NewFile="$BACKUP_PATH/db_$DBName"_$DBTables$(date +%Y%m%d).gz
 
 echo "-------------------------------------------"
 echo $(date +"%y-%m-%d %H:%M:%S")
@@ -19,7 +21,7 @@ then
     echo "[$NewFile]The backup file exists, can't backup!"
 else
     [ -n $DBPasswd ] && pass=-p$DBPasswd
-    mysqldump -u $DBUser $pass -h $DBHost --single-transaction --opt --skip-lock-tables $DBName | gzip > $NewFile
+    mysqldump -u $DBUser $pass -h $DBHost --single-transaction --opt --skip-lock-tables $DBName $DBTables | gzip > $NewFile
     md5sum $NewFile > $NewFile.md5
     echo "[$NewFile] Backup Success!"
 fi
