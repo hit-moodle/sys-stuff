@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -e
+
 CONFIG=`dirname $0`/../etc/config
 test -r $CONFIG || exit
 . $CONFIG
@@ -20,13 +22,12 @@ do
 done
 
 for SRC_DIR in $SRC_DIRS; do
-    DES_FILE=`echo ${SRC_DIR##*/}` 
-    DES_FILE=`printf "%s%s_%s%s" "$DES_DIR/" "$DES_FILE" "$CUR_DATE" ".tar.gz"`
-    tar -zcf $DES_FILE $SRC_DIR
+    SRC_FILE=`basename $SRC_DIR`
+    DES_FILE=`printf "%s%s_%s%s" "$DES_DIR/" "$SRC_FILE" "$CUR_DATE" ".tar.gz"`
+    cd `dirname $SRC_DIR`
+    tar -zcf $DES_FILE $SRC_FILE
     md5sum $DES_FILE > $DES_FILE.md5
 
     echo "$CUR_DATE: $DES_FILE from $SRC_DIR"
 done
-
-exit 0
 
