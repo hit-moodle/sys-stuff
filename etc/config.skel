@@ -12,7 +12,7 @@ MOODLE_TEMP_PATH=
 HTTPD_USER=
 
 # Backup settings
-BACKUP_PATH= # Path to store backup files
+BACKUP_TO= # Path to store backup files
 BACKUP_FROM="/xxx/yyy /foo/bar"
 KEEP_DAYS=
 
@@ -27,8 +27,8 @@ FTP_SERVER=
 FTP_USERNAME=
 FTP_PASSWORD=
 
-# Short BACKUP_PATH is dangerous!
-if [ -z $BACKUP_PATH ] || [ $BACKUP_PATH == "/" ] ; then
-    echo "BACKUP_PATH in config can not be empty!"
+# Short BACKUP_TO is dangerous!
+if [ -z $BACKUP_TO ] || [ $BACKUP_TO = "/" ] ; then
+    echo "BACKUP_TO in config can not be empty!"
     exit
 fi

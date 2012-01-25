@@ -8,7 +8,7 @@ test -r $CONFIG || exit
 
 CUR_DATE=`date +%Y%m%d `
 
-DES_DIR=$BACKUP_PATH
+DES_DIR=$BACKUP_TO
 SRC_DIRS=$BACKUP_FROM
 flags=d:s:l:?
 
