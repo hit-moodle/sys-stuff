@@ -5,6 +5,6 @@ CONFIG=`dirname $0`/../etc/config
 test -r $CONFIG || exit
 . $CONFIG
 
-echo "Cleaning old backup files in $BACKUP_PATH"
+echo "Cleaning old backup files in $BACKUP_TO"
 
-rm -fv `find $BACKUP_PATH -maxdepth 1 -type f -mtime +$KEEP_DAYS`
+rm -fv `find $BACKUP_TO -maxdepth 1 -type f -mtime +$KEEP_DAYS`
