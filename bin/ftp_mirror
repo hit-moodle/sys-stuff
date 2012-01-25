@@ -6,4 +6,4 @@ test -r $CONFIG || exit
 . $CONFIG
 
 echo "Mirroring backup files from $BACKUP_TO to $FTP_SERVER"
-cd $BACKUP_TO && lftp ftp://$FTP_USERNAME:$FTP_PASSWORD@$FTP_SERVER -e "mirror -R --delete --delete-first ; quit"
+cd $BACKUP_TO && lftp $FTP_SERVER -u $FTP_USERNAME,$FTP_PASSWORD -e "mirror -R --delete --delete-first ; quit"
