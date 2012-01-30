@@ -5,13 +5,8 @@ CONFIG=`dirname $0`/../etc/config
 test -r $CONFIG || exit
 . $CONFIG
 
-if [ ! -a $MOODLE_SESSIONS_PATH ]; then
-    mkdir -p $MOODLE_SESSIONS_PATH
-fi
-
-if [ ! -a $MOODLE_TEMP_PATH ]; then
-    mkdir -p $MOODLE_TEMP_PATH
-fi
+mkdir -p $MOODLE_SESSIONS_PATH
+mkdir -p $MOODLE_TEMP_PATH
 
 chown -R $HTTPD_USER: $MOODLE_SESSIONS_PATH
 chown -R $HTTPD_USER: $MOODLE_TEMP_PATH
